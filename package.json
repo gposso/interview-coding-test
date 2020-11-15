@@ -4,7 +4,7 @@
   "description": "ComparaOnline Software Engineer Test",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test nyc mocha -r ts-node/register spec/**/*.spec.ts --timeout=60000"
+    "test": "NODE_ENV=test nyc mocha -r ts-node/register spec/**/*.ts --timeout=60000"
   },
   "repository": {
     "type": "git",
