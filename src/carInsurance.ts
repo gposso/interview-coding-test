@@ -3,6 +3,7 @@ import { Product } from './product';
 import { KindOfProduct } from './enums/types';
 import { FullCoverageStrategy } from './fullCoverageStrategy';
 import { MegaCoverageStrategy } from './megaCoverageStrategy';
+import { SpecialFullCoverageStrategy } from './specialFullCoverageStrategy';
 
 export class CarInsurance {
     private strategies: Strategy[];
@@ -10,7 +11,8 @@ export class CarInsurance {
     constructor(private _products: Product[]) {
         this.strategies = [
             new FullCoverageStrategy,
-            new MegaCoverageStrategy
+            new MegaCoverageStrategy,
+            new SpecialFullCoverageStrategy
         ];
     }
 
