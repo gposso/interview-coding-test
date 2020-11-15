@@ -43,4 +43,52 @@ describe("test class CarInsurance", function () {
         expect(products[0].sellIn).equal(-1);
         expect(products[0].price).equal(80);
     });
+
+    it("should return update price for special full coverage when there are 11 days or greater", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 15, 20)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(14);
+        expect(products[0].price).equal(21);
+    });
+
+    it("should return update price for special full coverage when there are 10 days or less", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 10, 49)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(9);
+        expect(products[0].price).equal(50);
+    });
+
+    it("should return update price for special full coverage when there are 10 days or less", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 10, 25)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(9);
+        expect(products[0].price).equal(27);
+    });
+
+    it("should return update price for special full coverage when there are 5 days or less", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 5, 35)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(4);
+        expect(products[0].price).equal(38);
+    });
+
+    it("should return update price for special full coverage when no more days left drops price to 0", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 0, 50)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(-1);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for special full coverage when there are still days of sale", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SpecialFullCoverage, 2, 50)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Special Full Coverage');
+        expect(products[0].sellIn).equal(1);
+        expect(products[0].price).equal(50);
+    });
 });
