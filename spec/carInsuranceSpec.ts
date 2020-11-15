@@ -35,4 +35,12 @@ describe("test class CarInsurance", function () {
         expect(products[0].sellIn).equal(-28);
         expect(products[0].price).equal(50);
     });
+
+    it("should return update price for kind mega coverage", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.MegaCoverage, -1, 80)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Mega Coverage');
+        expect(products[0].sellIn).equal(-1);
+        expect(products[0].price).equal(80);
+    });
 });
