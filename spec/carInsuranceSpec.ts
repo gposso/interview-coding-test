@@ -91,4 +91,43 @@ describe("test class CarInsurance", function () {
         expect(products[0].sellIn).equal(1);
         expect(products[0].price).equal(50);
     });
+
+    it("should return update price for super sale when sellIn is greater or equal than zero", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 3, 6)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Super Sale');
+        expect(products[0].sellIn).equal(2);
+        expect(products[0].price).equal(4);
+    });
+
+    it("should return update price for super sale when sellIn is greater or equal than zero", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 1, 1)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Super Sale');
+        expect(products[0].sellIn).equal(0);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for super sale when price is equal than zero", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 1, 0)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Super Sale');
+        expect(products[0].sellIn).equal(0);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for super sale when price is equal than zero", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 1, 50)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Super Sale');
+        expect(products[0].sellIn).equal(0);
+        expect(products[0].price).equal(48);
+    });
+
+    it("it should throw an error if the product kind is not available for super sale", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 2, 51)]);
+        expect(function () {
+            carInsurance.updatePrice();
+        }).to.throw('the price of a product is never more than 50 or negative');
+    });
 });
