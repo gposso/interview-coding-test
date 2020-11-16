@@ -9,6 +9,9 @@ export class MegaCoverageStrategy implements Strategy {
     }
 
     updatePrice(product: Product): Product {
+        if (product.price !== 80) {
+            throw new Error('the price is 80 and it never alters');
+        }
         return product;
     }
 

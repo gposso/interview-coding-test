@@ -9,6 +9,10 @@ export class FullCoverageStrategy implements Strategy {
     }
 
     updatePrice(product: Product): Product {
+        if (product.price > 50 || product.price < 0) {
+            throw new Error('the price of a product is never more than 50 or negative');
+        }
+
         if (product.price < 50 ) {
             product.price += 1;
         }

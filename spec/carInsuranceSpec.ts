@@ -220,17 +220,21 @@ describe("test class CarInsurance", function () {
         expect(products[0].price).equal(3);
     });
 
-    it("it should throw an error if the product kind is never more than 50 or negative", function () {
-        const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 2, 51)]);
-        expect(function () {
-            carInsurance.updatePrice();
-        }).to.throw('the price of a product is never more than 50 or negative');
+    it("it should throw an error if the product is never more than 50 or negative", function () {
+        for (const value of Object.values(KindOfProduct)) {
+            if (value !== 'Mega Coverage') {
+                const carInsurance = new CarInsurance([new Product(value, 2, 51)]);
+                expect(function () {
+                    carInsurance.updatePrice();
+                }).to.throw('the price of a product is never more than 50 or negative');
+            }
+        }
     });
 
-    it("it should throw an error if the product kind is never more than 50 or negative", function () {
-        const carInsurance = new CarInsurance([new Product(KindOfProduct.MediumCoverage, 2, 51)]);
+    it("it should throw an error if the product kind mega coverage is different to 80", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.MegaCoverage, 2, 90)]);
         expect(function () {
             carInsurance.updatePrice();
-        }).to.throw('the price of a product is never more than 50 or negative');
+        }).to.throw('the price is 80 and it never alters');
     });
 });
