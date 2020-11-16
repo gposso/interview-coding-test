@@ -172,6 +172,54 @@ describe("test class CarInsurance", function () {
         expect(products[0].price).equal(3);
     });
 
+    it("should return update price for low coverage when sellIn is greater than 0", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, 16, 10)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(15);
+        expect(products[0].price).equal(9);
+    });
+
+    it("should return update price for low coverage when sellIn is equal than 0", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, 0, 2)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(-1);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for low coverage when sellIn is less than 0", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, -1, 0)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(-2);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for low coverage when price is equal than 0", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, -3, 0)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(-4);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for low coverage when price is equal than 1", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, -2, 1)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(-3);
+        expect(products[0].price).equal(0);
+    });
+
+    it("should return update price for low coverage when sellIn is greater than price", function () {
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, 15, 4)]);
+        const products = carInsurance.updatePrice();
+        expect(products[0].name).equal('Low Coverage');
+        expect(products[0].sellIn).equal(14);
+        expect(products[0].price).equal(3);
+    });
+
     it("it should throw an error if the product kind is never more than 50 or negative", function () {
         const carInsurance = new CarInsurance([new Product(KindOfProduct.SuperSale, 2, 51)]);
         expect(function () {
