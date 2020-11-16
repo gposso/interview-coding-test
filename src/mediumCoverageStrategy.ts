@@ -13,17 +13,15 @@ export class MediumCoverageStrategy implements Strategy {
             throw new Error('the price of a product is never more than 50 or negative');
         }
 
-        if (product.sellIn <= 0) {
-            product.price -= 2;
-        } else {
+        if (product.price > 0) {
             product.price -= 1;
         }
 
-        if (product.price < 0) {
-            product.price = 0;
-        }
-
         product.sellIn -= 1;
+
+        if (product.price > 0 && product.sellIn < 0) {
+            product.price -= 1;
+        }
 
         return product;
     }
