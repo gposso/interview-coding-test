@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { stubObject } from "ts-sinon";
 
 import { CarInsurance } from '../src/carInsurance';
 import { KindOfProduct } from '../src/enums/types';
@@ -6,9 +7,10 @@ import { Product } from '../src/product';
 
 describe("test class CarInsurance", function () {
     it("it should throw an error if the product kind is not available", function () {
-        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, 2, 0)]);
+        const carInsurance = new CarInsurance([new Product(KindOfProduct.LowCoverage, 2, 4)]);
+        const testStub = stubObject<CarInsurance>(carInsurance, { getUpdatePriceStrategy: undefined });
         expect(function () {
-            carInsurance.updatePrice();
+            testStub.updatePrice();
         }).to.throw('kind of product not available');
     });
 

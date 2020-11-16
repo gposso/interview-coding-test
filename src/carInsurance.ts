@@ -22,7 +22,7 @@ export class CarInsurance {
         ];
     }
 
-    private getUpdatePriceStrategy(kind: KindOfProduct): Strategy | undefined {
+    getUpdatePriceStrategy(kind: KindOfProduct): Strategy | undefined {
         return this.strategies.find(strategy => strategy.isSelected(kind));
     }
 
