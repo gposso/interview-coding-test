@@ -5,6 +5,7 @@ import { FullCoverageStrategy } from './fullCoverageStrategy';
 import { MegaCoverageStrategy } from './megaCoverageStrategy';
 import { SpecialFullCoverageStrategy } from './specialFullCoverageStrategy';
 import { SuperSaleStrategy } from './superSaleStrategy';
+import { MediumCoverageStrategy } from './mediumCoverageStrategy';
 
 export class CarInsurance {
     private strategies: Strategy[];
@@ -14,7 +15,8 @@ export class CarInsurance {
             new FullCoverageStrategy,
             new MegaCoverageStrategy,
             new SpecialFullCoverageStrategy,
-            new SuperSaleStrategy
+            new SuperSaleStrategy,
+            new MediumCoverageStrategy
         ];
     }
 
